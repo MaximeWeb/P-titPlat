@@ -45,7 +45,7 @@ buttonIngredient.addEventListener('click', () => {
       buttonUstensiles.style.display = "flex"
   });
 
-  const url = "/recipes.json"; 
+  const url = "recipes.json"; 
 
 async function fetchData(url) {   
   try {
