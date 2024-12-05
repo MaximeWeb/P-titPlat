@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>PetitPlat</title>
+  </head>
+  <body>
+    <header>
+       <div class="headerBgrd">
+        <img class="logo" src="assets/Logo.png">
+        <div class="divHeaderText">
+          <h1 class="headerText">CHERCHEZ PARMI PLUS DE 1500 RECETTES <br> 
+            DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</h1>
+        </div>
+        <div >
+          <form action="/rechercher" method="get" class="divInput">
+         <input class="input" type="search" name="q" placeholder="Rechercher une recette, un ingrédient ..." />
+         <button class="buttonInput" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+       </form>
+       </div>
+       </div>
+    </header>
+    <main>
+      <div class="divFilter">
+      <div class="search-name ingredient" >
+       <p>Ingrédients</p> 
+       <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="search-box firstFilter" >
+        <div class="flexNameFilter first">
+            <p>Ingrédients</p> 
+            <i class="fa-solid fa-chevron-up"></i>
+        </div>
+        <div >
+          <form action="/rechercher" method="get"  class="flexInput">
+        <input type="text" placeholder="">
+        <button class="buttonInput2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>  
+        </form> 
+        </div>
+      </div>
+      <div class="search-name appareils" >
+       <p>Appareils</p>
+       <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="search-box secondFilter" >
+        <div class="flexNameFilter second">
+         <p>Appareils</p>
+         <i class="fa-solid fa-chevron-up"></i>  
+        </div>
+        <div >
+          <form action="/rechercher" method="get" class="flexInput" >
+          <input type="text" placeholder="">
+        <button class="buttonInput2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button> 
+       </form>
+        </div>
+      </div>
+      <div class="search-name ustensiles" >
+        <p> Ustensiles</p>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="search-box thirdFilter" >
+        <div class="flexNameFilter third">
+         <p> Ustensiles</p>
+        <i class="fa-solid fa-chevron-up"></i>  
+        </div>
+        <div >
+          <form action="/rechercher" method="get" class="flexInput" >
+          <input type="text" placeholder="">
+        <button class="buttonInput2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>    
+          </form>
+        </div>
+      </div>  
+      </div>
+      
+      <div class="dataSection">
+        <div class="contentDataSection">
+        </div>
+      </div>
+      
+    </main>
+   
+   
+    <script src="index.js"></script>
+  </body>
+</html>

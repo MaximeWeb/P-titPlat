@@ -1,0 +1,242 @@
+* {
+    margin:0;
+}
+
+body {
+  background-color: #E5E5E5;
+}
+
+.headerBgrd {
+    height:667px ;
+    width: 100%;
+    background-image: url(assets/BackgroundHeader.png);
+    background-size: cover; /* L'image couvrira toute la largeur et hauteur du conteneur */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-position: center; 
+}
+
+.logo {
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.headerText {
+    color: #FFD15B;
+    font-size: 44px;
+    font-family:'Anton', sans-serif;
+   
+}
+.divHeaderText {
+    width: 890px;
+    height: 192px;
+    margin: auto;
+    text-align:center;
+    margin-top: 100px;
+   
+}
+
+.divInput {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1204px;
+   margin: auto;
+}
+
+.input {
+    flex: 1;
+   padding-left:30px;
+    height: 72px; 
+    outline: none;
+    border-radius: 9px;
+    overflow: hidden; 
+    color:#7A7A7A;
+}
+
+.buttonInput {
+    cursor:pointer;
+    width: 51px;
+    height: 51px;
+    background-color: black;
+    color:white;
+    border-radius: 9px;
+    overflow: hidden; 
+    position: relative;
+    right: 60px;
+}
+
+.buttonInput i {
+font-size:20px;
+}
+
+main {
+    background-color: #E5E5E5;
+    margin-top:0px;
+    padding-top: 30px;
+    margin-bottom: 0;
+}
+
+.divFilter {
+    width: 1000px;
+    display: flex;
+    justify-content: space-around;
+   
+}
+
+.search-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    width: 179px;
+    height: 56px;
+    color: #1B1B1B;
+    cursor: pointer;
+    border-radius: 5px;
+   
+  }
+
+.search-box {
+    /* display: none; */
+    background-color: white;
+    width: 179px;
+    height: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+   
+  }
+  
+.search-box input {
+    padding: 8px;
+    margin-left:16px;
+    width: 80%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+  }
+
+  .flexNameFilter {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top : 8px;
+    padding-bottom: 8px;
+  }
+
+  .buttonInput2 {
+    background: none;
+    border: none;
+    position: relative;
+    right: 30px;
+    cursor: pointer;
+    color: #7A7A7A;
+  }
+
+  .flexInput {
+    display: flex;
+  }
+
+.firstFilter {
+ display: none;
+}
+.secondFilter {
+  display: none;
+}
+.thirdFilter {
+  display: none;
+}
+
+
+.dataSection {
+  margin-top: 30px;
+}
+
+.contentDataSection {
+  margin-top: 40px;
+  margin-left:100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 70px;
+}
+
+.card {
+ 
+  height: 731px;
+  width: 380px;
+  background-color: white;
+  border-radius: 21px;
+}
+
+.imageCard { 
+  width: 380px;
+  height: 253px;
+  background-image: url("assets/téléchargement.jpg");
+  background-size: 100%;
+  object-fit: cover;
+  border-top-left-radius: 21px;
+  border-top-right-radius: 21px;
+}
+ .imageCard p {
+  float: right;
+  text-align: center;
+padding-top:7px;
+padding-left: 10px;
+padding-right: 10px;
+  width: 65px;
+  height: 26px;
+  background-color: #FFD15B;
+  border-radius: 14px;
+  margin-top:20px;
+  margin-right: 20px;;
+ }
+
+ .nameCard {
+  font-weight: 400;
+  margin-top:10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-family: 'anton', sans-serif;
+ }
+
+ .card h2,h3 {
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 20px;
+  color :#7A7A7A;
+  font-family: 'Manrope', sans-serif;
+ }
+
+ .contentCard {
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+ }
+
+ .descriptCard {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  width: 330px;
+  height: 72px;
+  overflow: hidden;
+}
+
+.ingredCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+ 
+}
+
+.quantityCard {
+  font-weight: 400;
+  color : #7A7A7A;
+}
+.ingredName {
+  font-weight: 600;
+}
+
