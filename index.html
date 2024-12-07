@@ -20,7 +20,7 @@
         </div>
         <div >
           <form action="/rechercher" method="get" class="divInput">
-         <input class="input" type="search" name="q" placeholder="Rechercher une recette, un ingrédient ..." />
+         <input class="input" type="search" name="searchMeal" placeholder="Rechercher une recette, un ingrédient ..." autocomplete="off"/>
          <button class="buttonInput" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
        </form>
        </div>
@@ -38,8 +38,8 @@
             <i class="fa-solid fa-chevron-up"></i>
         </div>
         <div >
-          <form action="/rechercher" method="get"  class="flexInput">
-        <input type="text" placeholder="">
+          <form action="/rechercher" method="get"  class="flexInput" id="formIngredients">
+        <input  id="ingredients" type="search" placeholder="" autocomplete="off" >
         <button class="buttonInput2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>  
         </form> 
         </div>
@@ -54,8 +54,8 @@
          <i class="fa-solid fa-chevron-up"></i>  
         </div>
         <div >
-          <form action="/rechercher" method="get" class="flexInput" >
-          <input type="text" placeholder="">
+          <form action="/rechercher" method="get" class="flexInput" id="formAppareils" >
+            <input  id="appareils" type="search" placeholder="" autocomplete="off" >
         <button class="buttonInput2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button> 
        </form>
         </div>
@@ -70,8 +70,8 @@
         <i class="fa-solid fa-chevron-up"></i>  
         </div>
         <div >
-          <form action="/rechercher" method="get" class="flexInput" >
-          <input type="text" placeholder="">
+          <form action="/rechercher" method="get" class="flexInput" id="formUstensiles" >
+            <input id="ustentiles" type="search" placeholder="" autocomplete="off" >
         <button class="buttonInput2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>    
           </form>
         </div>
@@ -85,7 +85,8 @@
       
     </main>
    
-   
+     <script src="recipes.js"></script>
     <script src="index.js"></script>
+  
   </body>
 </html>

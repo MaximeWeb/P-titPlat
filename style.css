@@ -2,6 +2,10 @@
     margin:0;
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
 body {
   background-color: #E5E5E5;
 }

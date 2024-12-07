@@ -9,7 +9,15 @@ const secondNameFilter = document.querySelector(".second")
 const thirdNameFilter = document.querySelector(".third")
 const sectionData = document.querySelector(".contentDataSection");
 const card = document.querySelector(".card");
-
+const buttonInput = document.querySelector(".divInput");
+const buttonInputIngredient = document.querySelector(".flexInput");
+const inputResult = document.querySelector(".input");
+const inputIngredients = document.getElementById('ingredients');
+const inputUstensiles = document.getElementById('ustentiles');
+const inputAppareils = document.getElementById('appareils');
+const formIngredients = document.getElementById('formIngredients');
+const formUstensiles = document.getElementById('formUstensiles');
+const formAppareils = document.getElementById('formAppareils');
 
 
 buttonIngredient.addEventListener('click', () => {
@@ -45,67 +53,145 @@ buttonIngredient.addEventListener('click', () => {
       buttonUstensiles.style.display = "flex"
   });
 
-  const url = "recipes.json"; 
+ const cards = (filter) => {
+  filter.forEach(element => {
+    const ingredientsList = element.ingredients.map(ingredient => {
+        if (ingredient.unit && ingredient.quantity) {
+            return `<p><span class="ingredName">${ingredient.ingredient}</span><br> <span class="quantityCard">${ingredient.quantity} ${ingredient.unit}</span></p>`;
+        } else if (ingredient.quantity) {
+            return `<p><span class="ingredName">${ingredient.ingredient}</span><br> <span class="quantityCard"> ${ingredient.quantity}</span></p>`;
+        } else {
+            return `<p><span class="ingredName">${ingredient.ingredient}</span></p>`;
+        }
+    }).join(""); 
 
-async function fetchData(url) {   
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    const data = await response.json(); 
-    return data;
-  } catch (error) {
-    console.error(error.message);
-    return null; 
-  }
-}
-
-let htmlContent = "";
-
-async function displayNineData() {
-    const data = await fetchData(url);
-    const arrayNineData = data.recipes.slice(0, 10);  // Prendre les 9 premiers éléments du tableau
-
-     // Variable pour accumuler le contenu HTML
-
-    // Créer une carte pour chaque élément dans arrayNineData
-    arrayNineData.forEach(element => {
-        // Récupérer les ingrédients et les afficher avec leur quantité et unité (si disponible)
-        const ingredientsList = element.ingredients.map(ingredient => {
-            // Vérifier si 'unit' existe et l'afficher si c'est le cas
-            if (ingredient.unit && ingredient.quantity) {
-                return `<p><span class="ingredName" >${ingredient.ingredient}</span><br> <span class="quantityCard">${ingredient.quantity} ${ingredient.unit}</span></p>`;
-            } else if (ingredient.quantity) {
-                return `<p><span class="ingredName" >${ingredient.ingredient}</span><br> <span class="quantityCard"> ${ingredient.quantity}</span></p>`;
-            } else {
-                return `<p><span class="ingredName" >${ingredient.ingredient}</span></p>`
-            }
-        }).join("") 
-
-        htmlContent += `
-             <div class="card">
-                <div class="imageCard">
-                <p>${element.time}min</p>
-                </div>
-                <div class="contentCard">
-                <p class="nameCard">${element.name}</p>
-                <h2>RECETTE</h2>
-                <p class="descriptCard">${element.description}</p>
-                <h3>INGRÉDIENTS</h3>
-                <div class="ingredCard">
-                ${ingredientsList}
-                </div>
-               </div>
+  let htmlContent = `
+         <div class="card">
+            <div class="imageCard">
+            <p>${element.time}min</p>
             </div>
-        `;
-    });
+            <div class="contentCard">
+            <p class="nameCard">${element.name}</p>
+            <h2>RECETTE</h2>
+            <p class="descriptCard">${element.description}</p>
+            <h3>INGRÉDIENTS</h3>
+            <div class="ingredCard">
+            ${ingredientsList}
+            </div>
+           </div>
+        </div>
+    `; sectionData.innerHTML += htmlContent;
+});
+ }
 
-    // Insérer toutes les cartes dans contentDataSection
-    sectionData.innerHTML = htmlContent;
+function filterByIngredientsAndName() {
+  let inputValue = inputResult.value.trim().toLowerCase();  // Ici on va transformer le text pour effacer les espace et passé en minuscule
+  console.log(inputValue);
+  inputResult.value = "";
+  sectionData.innerHTML = "";
+
+  
+  const filteredRecipes = recipes.filter(recipe => {    // on va filtrer notre tableau pour recuperer les valeurs 
+    const nameMatch = recipe.name.toLowerCase().includes(inputValue);  // Ici on va verifié que le nom de la recette en minuscule contient le resultat de la recherche
+    const ingredientsMatch = recipe.ingredients.some(ingredient =>  // Ici on va verifié que les ingreds de la recette en minuscule contiennent le resultat de la recherche
+      ingredient.ingredient.toLowerCase().includes(inputValue)
+    );
+    return nameMatch || ingredientsMatch;
+  });
+  // Vérifier si des résultats ont été trouvés
+  if (filteredRecipes.length === 0) {
+    sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
+    return;
+  }
+
+ cards(filteredRecipes)
 }
-displayNineData()
 
+ function filterByIngredients() {
+  let inputValue = inputIngredients.value.trim().toLowerCase();  
+  console.log(inputValue);
+  inputIngredients.value = "";
+  sectionData.innerHTML = "";
+  
+  const filteredRecipes = recipes.filter(recipe => {   
+    const ingredientsMatch = recipe.ingredients.some(ingredient => 
+      ingredient.ingredient.toLowerCase().includes(inputValue)
+    );
+    return  ingredientsMatch;
+  });
+
+  if (filteredRecipes.length === 0) {
+    sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
+    return;
+  }
+  cards(filteredRecipes)
+}
+
+function filterByAppareils() {
+  let inputValue = inputAppareils.value.trim().toLowerCase();  
+  console.log(inputValue);
+  inputAppareils.value = "";
+  sectionData.innerHTML = "";
+  
+  const filteredRecipes = recipes.filter(recipe => {    
+    const appareilsMatch = recipe.appliance.toLowerCase().includes(inputValue)
+    
+    return  appareilsMatch;
+  });
+
+  if (filteredRecipes.length === 0) {
+    sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
+    return;
+  }
+  cards(filteredRecipes)
+}
+
+function filterByUstensils() {
+  let inputValue = inputUstensiles.value.trim().toLowerCase();  
+  console.log(inputValue);
+  inputUstensiles.value = "";
+  sectionData.innerHTML = "";
+
+  
+  const filteredRecipes = recipes.filter(recipe => {   
+    const ustensilesMatch = recipe.ustensils.some(ustensil =>  // Ici on va verifié que les ingreds de la recette en minuscule contiennent le resultat de la recherche
+    ustensil.toLowerCase().includes(inputValue)
+  );
+
+    return  ustensilesMatch;
+  });
+  if (filteredRecipes.length === 0) {
+    sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
+    return;
+  }
+  cards(filteredRecipes)
+}
+
+ function initialDisplayData() {
+      const arrayNineData = recipes.slice(0, 10); 
+      cards(arrayNineData)
+  }    
+  initialDisplayData();
+
+buttonInput.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+  filterByIngredientsAndName()
+});
+
+formIngredients.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+  filterByIngredients()
+})
+
+formAppareils.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+  filterByAppareils()
+})
+
+formUstensiles.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+  filterByUstensils()
+})
 
 
 
