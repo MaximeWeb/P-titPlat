@@ -18,6 +18,11 @@ const inputAppareils = document.getElementById('appareils');
 const formIngredients = document.getElementById('formIngredients');
 const formUstensiles = document.getElementById('formUstensiles');
 const formAppareils = document.getElementById('formAppareils');
+const recupContentIngred = document.getElementById("recupContentIngredients");
+const recupContentAppareils = document.getElementById("recupContentAppareils");
+const recupContentUstensils = document.getElementById("recupContentUstensiles");
+const filterResult = document.querySelector(".filterResult");
+const closeFilter = document.querySelector(".closeFilter");
 
 
 buttonIngredient.addEventListener('click', () => {
@@ -53,6 +58,13 @@ buttonIngredient.addEventListener('click', () => {
       buttonUstensiles.style.display = "flex"
   });
 
+  filterResult.addEventListener('click', (event) => {
+    if (event.target.classList.contains('closeFilter')) {
+      event.target.parentElement.remove();
+    }
+  });
+
+ 
  const cards = (filter) => {
   filter.forEach(element => {
     const ingredientsList = element.ingredients.map(ingredient => {
@@ -90,7 +102,6 @@ function filterByIngredientsAndName() {
   inputResult.value = "";
   sectionData.innerHTML = "";
 
-  
   const filteredRecipes = recipes.filter(recipe => {    // on va filtrer notre tableau pour recuperer les valeurs 
     const nameMatch = recipe.name.toLowerCase().includes(inputValue);  // Ici on va verifié que le nom de la recette en minuscule contient le resultat de la recherche
     const ingredientsMatch = recipe.ingredients.some(ingredient =>  // Ici on va verifié que les ingreds de la recette en minuscule contiennent le resultat de la recherche
@@ -110,8 +121,15 @@ function filterByIngredientsAndName() {
  function filterByIngredients() {
   let inputValue = inputIngredients.value.trim().toLowerCase();  
   console.log(inputValue);
+
+recupContentIngred.innerHTML += `<p class="valueRecup">${inputIngredients.value}</p>`
+filterResult.innerHTML +=   `<p class="resultBloc">${inputIngredients.value} <span class="closeFilter"> X </span></p>`
+
+
   inputIngredients.value = "";
   sectionData.innerHTML = "";
+
+  
   
   const filteredRecipes = recipes.filter(recipe => {   
     const ingredientsMatch = recipe.ingredients.some(ingredient => 
@@ -130,6 +148,9 @@ function filterByIngredientsAndName() {
 function filterByAppareils() {
   let inputValue = inputAppareils.value.trim().toLowerCase();  
   console.log(inputValue);
+
+  recupContentAppareils.innerHTML += `<p class="valueRecup">${inputAppareils.value}</p>`
+  filterResult.innerHTML +=   `<p class="resultBloc">${inputAppareils.value} <span class="closeFilter"> X </span> </p>`
   inputAppareils.value = "";
   sectionData.innerHTML = "";
   
@@ -149,6 +170,8 @@ function filterByAppareils() {
 function filterByUstensils() {
   let inputValue = inputUstensiles.value.trim().toLowerCase();  
   console.log(inputValue);
+  recupContentUstensils.innerHTML += `<p class="valueRecup">${inputUstensiles.value}</p>`
+  filterResult.innerHTML +=   `<p class="resultBloc">${inputUstensiles.value} <span class="closeFilter"> X </span> </p>`
   inputUstensiles.value = "";
   sectionData.innerHTML = "";
 

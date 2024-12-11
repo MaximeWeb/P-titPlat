@@ -10,6 +10,10 @@ body {
   background-color: #E5E5E5;
 }
 
+header {
+  width: 100%;
+}
+
 .headerBgrd {
     height:667px ;
     width: 100%;
@@ -90,7 +94,7 @@ main {
     width: 1000px;
     display: flex;
     justify-content: space-around;
-   
+   margin-left:23px;
 }
 
 .search-name {
@@ -103,6 +107,7 @@ main {
     color: #1B1B1B;
     cursor: pointer;
     border-radius: 5px;
+    font-family: 'Manrope', sans-serif;
    
   }
 
@@ -110,10 +115,13 @@ main {
     /* display: none; */
     background-color: white;
     width: 179px;
-    height: 100px;
+    height: auto;
     border-radius: 5px;
-    cursor: pointer;
-   
+    padding-bottom: 10px;
+  }
+
+  .search-box i {
+   cursor: pointer;
   }
   
 .search-box input {
@@ -130,6 +138,9 @@ main {
     justify-content: space-around;
     padding-top : 8px;
     padding-bottom: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
   }
 
   .buttonInput2 {
@@ -143,6 +154,7 @@ main {
 
   .flexInput {
     display: flex;
+    
   }
 
 .firstFilter {
@@ -249,4 +261,44 @@ padding-right: 10px;
 .ingredName {
   font-weight: 600;
 }
+
+.valueRecup {
+  padding-left:20px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.valueRecup:hover {
+ background-color:#FFD15B;
+ margin-left: 0px;
+ cursor: pointer;
+ padding-top:5px;
+ padding-bottom: 5px;
+}
+
+.filterResult {
+  display: flex;
+  width: auto;
+  margin-top:30px;
+  margin-left:100px;
+}
+
+.resultBloc {
+  height: 43px;
+  width: 183px;
+  background-color: #FFD15B;
+ padding-top: 20px;
+ border-radius: 10px;
+ margin-right: 30px;
+ font-family: 'Manrope', sans-serif;
+ display: flex;
+ justify-content: space-around;
+}
+
+.closeFilter {
+  cursor: pointer;
+}
+
 
