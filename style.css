@@ -186,6 +186,7 @@ main {
   width: 380px;
   background-color: white;
   border-radius: 21px;
+  margin-bottom: 10px;
 }
 
 .imageCard { 
@@ -204,6 +205,8 @@ main {
 
 
  .imageCard p {
+  position: relative;
+  bottom: 250px;
   float: right;
   text-align: center;
 padding-top:7px;
