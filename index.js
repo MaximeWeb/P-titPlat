@@ -118,6 +118,7 @@ const displayValueList = (filteredRecipes) => {  // function qui va mettre a jou
   let htmlContent = `
          <div class="card">
             <div class="imageCard">
+            <img src="assets/photos-plats/${element.image}" class="image" alt="image de ${element.name}"/>
             <p>${element.time}min</p>
             </div>
             <div class="contentCard">
@@ -143,7 +144,7 @@ filterResult.addEventListener('click', (event) => { // Va gerer les bloc filters
 
     // si c'est vide on vide + function init
     if (nameElements.length === 0) {
-      console.log("Aucun filtre restant. Réinitialisation des recettes.");
+      console.log("Aucun filtre restant , reinitialisisation de l'affichage");
       sectionData.innerHTML = "";
       initialDisplayData(); 
 

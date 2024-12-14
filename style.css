@@ -191,12 +191,18 @@ main {
 .imageCard { 
   width: 380px;
   height: 253px;
-  background-image: url("assets/téléchargement.jpg");
-  background-size: 100%;
+  
+}
+
+.image {
   object-fit: cover;
+  height: 100%;
+  width: 100%;
   border-top-left-radius: 21px;
   border-top-right-radius: 21px;
 }
+
+
  .imageCard p {
   float: right;
   text-align: center;
