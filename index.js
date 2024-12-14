@@ -135,7 +135,7 @@ const displayValueList = (filteredRecipes) => {  // function qui va mettre a jou
 });
 }
 
-filterResult.addEventListener('click', (event) => { // Va gerer les bloc filters , fait disparaitre le bloc au click de la croix et tri les recettes
+filterResult.addEventListener('click', (event) => { // fait disparaitre le bloc filter au click de la croix et tri les recettes, maj le resultat
   if (event.target.classList.contains("closeFilter")) {
     event.target.parentElement.remove();  // recupere la classe parent de closefilter et la remove
 
@@ -285,7 +285,7 @@ buttonInput.addEventListener('submit', (event) => { // Envoie les values du form
   searchRecipeAndDisplay()
 });
 
-formIngredients.addEventListener('submit', (event) => {
+formIngredients.addEventListener('submit', (event) => { // Envoie les value du form ingredients
   event.preventDefault(); 
   const inputValue = inputIngredients.value.trim().toLowerCase(); 
   console.log(inputValue);
@@ -294,7 +294,7 @@ formIngredients.addEventListener('submit', (event) => {
   filterRecipesByIngredient(inputValue);
 });
 
-formAppareils.addEventListener('submit', (event) => {
+formAppareils.addEventListener('submit', (event) => { // Envoie les value du form appareils
   event.preventDefault(); 
   const inputValue = inputAppareils.value.trim().toLowerCase();
   console.log(inputValue)
@@ -304,7 +304,7 @@ formAppareils.addEventListener('submit', (event) => {
   
 })
 
-formUstensiles.addEventListener('submit', (event) => {
+formUstensiles.addEventListener('submit', (event) => { // Envoie les value du form Ustensiles
   event.preventDefault(); 
   const inputValue = inputUstensiles.value.trim().toLowerCase();
   console.log(inputValue)
