@@ -18,8 +18,8 @@ header {
     height:667px ;
     width: 100%;
     background-image: url(assets/BackgroundHeader.png);
-    background-size: cover; /* L'image couvrira toute la largeur et hauteur du conteneur */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-size: cover;
+    background-repeat: no-repeat; 
     background-position: center; 
 }
 
@@ -90,11 +90,13 @@ main {
     margin-bottom: 0;
 }
 
+
 .divFilter {
     width: 1000px;
     display: flex;
     justify-content: space-around;
-   margin-left:23px;
+   margin-left:30px;
+   
 }
 
 .search-name {
@@ -108,17 +110,36 @@ main {
     cursor: pointer;
     border-radius: 5px;
     font-family: 'Manrope', sans-serif;
-   
+    
+  }
+
+  .test {
+    position: relative;
+    width: 179px;
   }
 
 .search-box {
-    /* display: none; */
+    position: absolute;
+    left: 0;
+    z-index: 10; 
     background-color: white;
     width: 179px;
-    height: auto;
     border-radius: 5px;
     padding-bottom: 10px;
+   
   }
+
+  /* .ingredient {
+   position: relative;
+  }
+
+.appareils {
+position: relative;
+}
+
+.ustensiles {
+position: relative;
+} */
 
   .search-box i {
    cursor: pointer;
@@ -141,6 +162,7 @@ main {
     font-family: 'Manrope', sans-serif;
     font-weight: 500;
     font-size: 16px;
+    /* position: relative; */
   }
 
   .buttonInput2 {
@@ -157,14 +179,28 @@ main {
     
   }
 
+
 .firstFilter {
  display: none;
+ max-height: 300px;
+ overflow: hidden;
+ overflow-y: scroll; 
+
 }
 .secondFilter {
   display: none;
+  max-height: 300px;
+  overflow: hidden;
+  overflow-y: scroll;
+  
+  
 }
 .thirdFilter {
   display: none;
+  max-height: 300px;
+  overflow: hidden;
+  overflow-y: scroll; 
+  
 }
 
 
@@ -187,6 +223,8 @@ main {
   background-color: white;
   border-radius: 21px;
   margin-bottom: 10px;
+
+
 }
 
 .imageCard { 
@@ -304,10 +342,23 @@ padding-right: 10px;
  font-family: 'Manrope', sans-serif;
  display: flex;
  justify-content: space-around;
+ text-align: center;
+ font-weight: bold;
 }
 
 .closeFilter {
   cursor: pointer;
+  color:#FFD15B;
+  height: 25px; 
+  width: 25px;  
+  border-radius: 50%; 
+  background-color: black; 
+ 
+  align-items: center;
+ 
+ 
 }
+
+
 
 

@@ -29,6 +29,11 @@ const closeFilter = filterResult.querySelectorAll(".closeFilter");
 buttonIngredient.addEventListener('click', () => {  // Ouvre la liste des ingrédients
     buttonIngredient.style.display = "none"
       firstFilter.style.display = "Block"
+       secondFilter.style.display = "none"
+      buttonAppareils.style.display = "flex"
+       thirdFilter.style.display = "none"
+      buttonUstensiles.style.display = "flex"
+     
   });
 
   firstNameFilter.addEventListener('click', () => { // Ferme la liste des ingrédients
@@ -41,6 +46,11 @@ buttonIngredient.addEventListener('click', () => {  // Ouvre la liste des ingré
   buttonAppareils.addEventListener('click', () => { // Ouvre la liste des Appareils
     buttonAppareils.style.display = "none"
       secondFilter.style.display = "Block"
+       firstFilter.style.display = "none"
+      buttonIngredient.style.display = "flex"
+       thirdFilter.style.display = "none"
+      buttonUstensiles.style.display = "flex"
+     
   });
 
   secondNameFilter.addEventListener('click', () => { // Ferme la liste des Appareils
@@ -51,6 +61,10 @@ buttonIngredient.addEventListener('click', () => {  // Ouvre la liste des ingré
   buttonUstensiles.addEventListener('click', () => { // Ouvre la liste des Ustensiles
     buttonUstensiles.style.display = "none"
       thirdFilter.style.display = "Block"
+        firstFilter.style.display = "none"
+      buttonIngredient.style.display = "flex"
+       secondFilter.style.display = "none"
+      buttonAppareils.style.display = "flex"
   });
 
   thirdNameFilter.addEventListener('click', () => { // Ferme la liste des Ustensiles
@@ -65,17 +79,19 @@ const displayValueList = (filteredRecipes) => {  // function qui va mettre a jou
   const uniqueAppareils = new Set();
   const uniqueUstensils = new Set();
 
-  filteredRecipes.forEach(recipe => { // pour toutes les recettes recu
-    recipe.ingredients.forEach(ingredient => {
-      uniqueIngredients.add(ingredient.ingredient); // on ajoute les ingredients dans notre set ingredients
-    });
-   
-    recipe.ustensils.forEach(ustensil => {  // on ajoutes les ustensils dans notre set ustensils
-      uniqueUstensils.add(ustensil);
-    });
-
-    uniqueAppareils.add(recipe.appliance); // et on ajoute notre unique appareil dans notre set appareils
-  });
+  for (let i = 0; i < filteredRecipes.length; i++) { 
+    const recipe = filteredRecipes[i];   // compteur de ma boucle 
+  
+    for (let j = 0; j < recipe.ingredients.length; j++) { // pour toutes les recettes recupére via le compteur, on va recupére les ingrédients
+      uniqueIngredients.add(recipe.ingredients[j].ingredient); // on ajoute nos ingredients a notre set
+    }
+  
+    for (let k = 0; k < recipe.ustensils.length; k++) { 
+      uniqueUstensils.add(recipe.ustensils[k]); 
+    }
+  
+    uniqueAppareils.add(recipe.appliance); // n'a qu'un seul appareils 
+  }
 
   // on va changer ces set en array afin de pouvoir trié dans l'ordre alphabétique
   const sortedIngredients = Array.from(uniqueIngredients).sort((a,b) => a.localeCompare(b));
@@ -133,7 +149,7 @@ const displayValueList = (filteredRecipes) => {  // function qui va mettre a jou
         </div>
     `; sectionData.innerHTML += htmlContent;
 });
-}
+};
 
 filterResult.addEventListener('click', (event) => { // fait disparaitre le bloc filter au click de la croix et tri les recettes, maj le resultat
   if (event.target.classList.contains("closeFilter")) {
@@ -170,7 +186,7 @@ filterResult.addEventListener('click', (event) => { // fait disparaitre le bloc 
   }
 });
 
-let currentFilteredRecipes = [];// Tableau qui va recevoir des recettes filtrées 
+let currentFilteredRecipes = []; // Tableau qui va recevoir des recettes filtrées 
 
 // Function qui va recuperer la value de l'input, filtrer le tableau pour verifié si la value est présente dans des recettes , si c'est le cas on recupere ces recettes
 function searchRecipeAndDisplay() {
@@ -200,7 +216,7 @@ function searchRecipeAndDisplay() {
   
   console.log(currentFilteredRecipes)// Met à jour l'état global des recettes filtrées
   // return filteredRecipes;
-}
+};
 
 function filterRecipesByIngredient(ingredient) { // Va mettres a jour les recettes en fonction de l'ingredient recu
   const filteredRecipes = currentFilteredRecipes.filter(recipe => {
@@ -214,15 +230,16 @@ function filterRecipesByIngredient(ingredient) { // Va mettres a jour les recett
   currentFilteredRecipes = filteredRecipes; // Met à jour l'état global avec les nouvelles recettes filtrées
   
   console.log(currentFilteredRecipes) 
-}
+};
 
 recupContentIngred.addEventListener('click', (event) => { // Va target le textContent de l'element cliquable pour l'envoyé a notre function filterRecipesByIngredient
   if(event.target.classList.contains('valueRecup')) {
      const clickedIngredient = event.target.textContent;
-     filterResult.innerHTML += `<div class="resultBloc"><p class="nameElement">${clickedIngredient}</p><span class="closeFilter"> X </span></div>`;
+     filterResult.innerHTML += `<div class="resultBloc"><p class="nameElement">${clickedIngredient}</p><span class="closeFilter"> x </span></div>`;
     filterRecipesByIngredient(clickedIngredient);
   } 
-
+firstFilter.style.display = "none"
+      buttonIngredient.style.display = "flex"
 });
 
 function filterRecipesByAppareil(appliance) { // Va mettres a jour les recettes en fonction de l'appareil recu
@@ -243,6 +260,7 @@ recupContentAppareils.addEventListener('click', (event) => {// Va target le text
      filterResult.innerHTML += `<div class="resultBloc"><p class="nameElement">${clickedAppareil}</p><span class="closeFilter"> X </span></div>`;
     filterRecipesByAppareil(clickedAppareil);
   } 
+  
 });
 
 function filterRecipesByUstensil(ustensil) { // Va mettres a jour les recettes en fonction de l'ustensile recu
@@ -267,6 +285,7 @@ recupContentUstensils.addEventListener('click', (event) => { // Va target le tex
    
 });
 
+
 // INIT
 
  function initialDisplayData() { // Affiche les 10 premieres recettes et leurs liste de filtre , initialement.
@@ -290,8 +309,21 @@ formIngredients.addEventListener('submit', (event) => { // Envoie les value du f
   const inputValue = inputIngredients.value.trim().toLowerCase(); 
   console.log(inputValue);
 
-  filterResult.innerHTML += `<div class="resultBloc"><p class="nameElement">${inputValue}</p><span class="closeFilter"> X </span></div>`;
+  filterResult.innerHTML += `<option class="resultBloc"><p class="nameElement">${inputValue}</p><span class="closeFilter"> X </span></option>`;
   filterRecipesByIngredient(inputValue);
+});
+
+// Ajoute un événement "input" pour filtrer les options visibles
+inputIngredients.addEventListener('input', function () {
+  const filter = inputIngredients.value.trim().toLowerCase();
+
+  // Parcourt toutes les options dans la liste déroulante
+  if(inputIngredients.value == "") {
+     initialDisplayData()
+  } else {
+    filterRecipesByIngredient(filter)
+  }
+  
 });
 
 formAppareils.addEventListener('submit', (event) => { // Envoie les value du form appareils

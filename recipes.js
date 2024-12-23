@@ -1495,7 +1495,7 @@
     },
     {
         "id": 43,
-        "image": "Recette43.jpg",
+        "image": "Recette46.jpg",
         "name": "Tarte au citron",
         "servings": 6,
         "ingredients": [
