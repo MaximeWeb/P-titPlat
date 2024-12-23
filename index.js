@@ -191,27 +191,27 @@ function searchRecipeAndDisplay() {
   let inputValue = inputResult.value.trim().toLowerCase();
   sectionData.innerHTML = "";
 
-  // Initialiser un tableau vide pour stocker les recettes filtrées
+  
   let filteredRecipes = [];
 
-  // Parcourir toutes les recettes
+  
   for (let i = 0; i < recipes.length; i++) {
     const recipe = recipes[i];
 
-    // Vérifier si la recette correspond à la recherche
+  
     const nameMatch = recipe.name.toLowerCase().includes(inputValue);
     const descriptionMatch = recipe.description.toLowerCase().includes(inputValue);
     const ingredientsMatch = recipe.ingredients.some(item =>
       item.ingredient.toLowerCase().includes(inputValue)
     );
 
-    // Si l'une des conditions est remplie, ajouter la recette au tableau filteredRecipes
+ 
     if (nameMatch || ingredientsMatch || descriptionMatch) {
       filteredRecipes.push(recipe);
     }
   }
 
-  // Vérifier si des recettes ont été trouvées
+ 
   if (filteredRecipes.length === 0) {
     sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
     recupContentIngred.innerHTML = "";
@@ -220,12 +220,12 @@ function searchRecipeAndDisplay() {
     currentFilteredRecipes = [];
   }
 
-  // Afficher les résultats filtrés
+  
   displayValueList(filteredRecipes);
   cards(filteredRecipes);
   currentFilteredRecipes = filteredRecipes;
 
-  console.log(currentFilteredRecipes); // Met à jour l'état global des recettes filtrées
+  console.log(currentFilteredRecipes); 
   // return filteredRecipes;
 };
 
