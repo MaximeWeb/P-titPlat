@@ -79,19 +79,17 @@ const displayValueList = (filteredRecipes) => {  // function qui va mettre a jou
   const uniqueAppareils = new Set();
   const uniqueUstensils = new Set();
 
-  for (let i = 0; i < filteredRecipes.length; i++) { 
-    const recipe = filteredRecipes[i];   // compteur de ma boucle 
-  
-    for (let j = 0; j < recipe.ingredients.length; j++) { // pour toutes les recettes recupére via le compteur, on va recupére les ingrédients
-      uniqueIngredients.add(recipe.ingredients[j].ingredient); // on ajoute nos ingredients a notre set
-    }
-  
-    for (let k = 0; k < recipe.ustensils.length; k++) { 
-      uniqueUstensils.add(recipe.ustensils[k]); 
-    }
-  
-    uniqueAppareils.add(recipe.appliance); // n'a qu'un seul appareils 
-  }
+  filteredRecipes.forEach(recipe => { // pour toutes les recettes recu
+    recipe.ingredients.forEach(ingredient => {
+      uniqueIngredients.add(ingredient.ingredient); // on ajoute les ingredients dans notre set ingredients
+    });
+   
+    recipe.ustensils.forEach(ustensil => {  // on ajoutes les ustensils dans notre set ustensils
+      uniqueUstensils.add(ustensil);
+    });
+
+    uniqueAppareils.add(recipe.appliance); // et on ajoute notre unique appareil dans notre set appareils
+  });
 
   // on va changer ces set en array afin de pouvoir trié dans l'ordre alphabétique
   const sortedIngredients = Array.from(uniqueIngredients).sort((a,b) => a.localeCompare(b));
@@ -193,28 +191,41 @@ function searchRecipeAndDisplay() {
   let inputValue = inputResult.value.trim().toLowerCase();
   sectionData.innerHTML = "";
 
-  const filteredRecipes = recipes.filter(recipe => {
+  // Initialiser un tableau vide pour stocker les recettes filtrées
+  let filteredRecipes = [];
+
+  // Parcourir toutes les recettes
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+
+    // Vérifier si la recette correspond à la recherche
     const nameMatch = recipe.name.toLowerCase().includes(inputValue);
     const descriptionMatch = recipe.description.toLowerCase().includes(inputValue);
     const ingredientsMatch = recipe.ingredients.some(item =>
       item.ingredient.toLowerCase().includes(inputValue)
     );
-    return nameMatch || ingredientsMatch || descriptionMatch;
-  });
 
+    // Si l'une des conditions est remplie, ajouter la recette au tableau filteredRecipes
+    if (nameMatch || ingredientsMatch || descriptionMatch) {
+      filteredRecipes.push(recipe);
+    }
+  }
+
+  // Vérifier si des recettes ont été trouvées
   if (filteredRecipes.length === 0) {
     sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
     recupContentIngred.innerHTML = "";
     recupContentAppareils.innerHTML = "";
     recupContentUstensils.innerHTML = "";
-    currentFilteredRecipes = []; 
+    currentFilteredRecipes = [];
   }
 
+  // Afficher les résultats filtrés
   displayValueList(filteredRecipes);
   cards(filteredRecipes);
   currentFilteredRecipes = filteredRecipes;
-  
-  console.log(currentFilteredRecipes)// Met à jour l'état global des recettes filtrées
+
+  console.log(currentFilteredRecipes); // Met à jour l'état global des recettes filtrées
   // return filteredRecipes;
 };
 
