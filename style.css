@@ -185,6 +185,8 @@ position: relative;
  max-height: 300px;
  overflow: hidden;
  overflow-y: scroll; 
+ scrollbar-width: thin; 
+  scrollbar-color: #FFD15B black;
 
 }
 .secondFilter {
@@ -192,15 +194,16 @@ position: relative;
   max-height: 300px;
   overflow: hidden;
   overflow-y: scroll;
-  
-  
+  scrollbar-width: thin; 
+  scrollbar-color: #FFD15B black;
 }
 .thirdFilter {
   display: none;
   max-height: 300px;
   overflow: hidden;
   overflow-y: scroll; 
-  
+  scrollbar-width: thin; 
+  scrollbar-color: #FFD15B black;
 }
 
 
