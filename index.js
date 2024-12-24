@@ -364,7 +364,7 @@ inputAppareils.addEventListener('input', function () {
 });
 
 inputUstensiles.addEventListener('input', function () {
-  const filter = inputUstensils.value.trim().toLowerCase();
+  const filter = inputUstensiles.value.trim().toLowerCase();
 
   if (filter === "") {
     initialDisplayData(); // Si l'input est vide, afficher les données initiales
