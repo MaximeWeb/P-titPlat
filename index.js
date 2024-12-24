@@ -115,6 +115,11 @@ const displayValueList = (filteredRecipes) => {  // function qui va mettre a jou
     recupContentUstensils.innerHTML += `<p class="valueRecup">${ustensil}</p>`;
   });
 
+  contentListFilter = sortedIngredients
+  contentListFilterAppareils = sortedAppareils;
+contentListFilterUstensils = sortedUstensils;
+  console.log(contentListFilter)
+
 };
 
  const cards = (filteredRecipes) => { // function qui prend en parametre des recettes filtré , et les affiches dans un bloc html
@@ -184,6 +189,9 @@ filterResult.addEventListener('click', (event) => { // fait disparaitre le bloc 
   }
 });
 
+let contentListFilter = []
+let contentListFilterAppareils = [];
+let contentListFilterUstensils = [];
 let currentFilteredRecipes = []; // Tableau qui va recevoir des recettes filtrées 
 
 // Function qui va recuperer la value de l'input, filtrer le tableau pour verifié si la value est présente dans des recettes , si c'est le cas on recupere ces recettes
@@ -191,41 +199,28 @@ function searchRecipeAndDisplay() {
   let inputValue = inputResult.value.trim().toLowerCase();
   sectionData.innerHTML = "";
 
-  
-  let filteredRecipes = [];
-
-  
-  for (let i = 0; i < recipes.length; i++) {
-    const recipe = recipes[i];
-
-  
+  const filteredRecipes = recipes.filter(recipe => {
     const nameMatch = recipe.name.toLowerCase().includes(inputValue);
     const descriptionMatch = recipe.description.toLowerCase().includes(inputValue);
     const ingredientsMatch = recipe.ingredients.some(item =>
       item.ingredient.toLowerCase().includes(inputValue)
     );
+    return nameMatch || ingredientsMatch || descriptionMatch;
+  });
 
- 
-    if (nameMatch || ingredientsMatch || descriptionMatch) {
-      filteredRecipes.push(recipe);
-    }
-  }
-
- 
   if (filteredRecipes.length === 0) {
-    sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
+    sectionData.innerHTML = <p>Aucune recette trouvée pour "${inputValue}".</p>;
     recupContentIngred.innerHTML = "";
     recupContentAppareils.innerHTML = "";
     recupContentUstensils.innerHTML = "";
-    currentFilteredRecipes = [];
-  }
+    currentFilteredRecipes = []; 
+  } 
 
-  
   displayValueList(filteredRecipes);
   cards(filteredRecipes);
   currentFilteredRecipes = filteredRecipes;
-
-  console.log(currentFilteredRecipes); 
+  
+  console.log(currentFilteredRecipes)// Met à jour l'état global des recettes filtrées
   // return filteredRecipes;
 };
 
@@ -263,7 +258,7 @@ function filterRecipesByAppareil(appliance) { // Va mettres a jour les recettes 
   displayValueList(filteredRecipes)
   currentFilteredRecipes = filteredRecipes;
   console.log(currentFilteredRecipes)
-}
+};
 
 recupContentAppareils.addEventListener('click', (event) => {// Va target le textContent de l'element cliquable pour l'envoyé a notre function filterRecipesByAppareils
   if(event.target.classList.contains('valueRecup')) {
@@ -285,7 +280,7 @@ function filterRecipesByUstensil(ustensil) { // Va mettres a jour les recettes e
   displayValueList(filteredRecipes)
   currentFilteredRecipes = filteredRecipes;
   console.log(currentFilteredRecipes)
-}
+};
 
 recupContentUstensils.addEventListener('click', (event) => { // Va target le textContent de l'element cliquable pour l'envoyé a notre function filterRecipesByUstensil
   if(event.target.classList.contains('valueRecup')) {
@@ -295,6 +290,89 @@ recupContentUstensils.addEventListener('click', (event) => { // Va target le tex
   }
    
 });
+
+
+// Update des filtres en fonction de la recherche a l'input
+
+const updateIngredientListDisplay = (filteredIngredients) => {
+  recupContentIngred.innerHTML = ""; // Vider la liste d'affichage
+
+  // Ajouter chaque ingrédient filtré à la liste
+  filteredIngredients.forEach(ingredient => {
+    recupContentIngred.innerHTML += `<p class="valueRecup">${ingredient}</p>`;
+  });
+};
+const filterContentList = (filterValue) => {
+  const filteredIngredients = contentListFilter.filter(ingredient =>
+    ingredient.toLowerCase().includes(filterValue) // Vérifie si la valeur de l'input est incluse dans l'ingrédient
+  );
+
+  updateIngredientListDisplay(filteredIngredients); // Met à jour l'affichage de la liste filtrée
+};
+const updateApplianceListDisplay = (filteredAppliances) => {
+  recupContentAppareils.innerHTML = ""; // Vider la liste d'affichage
+
+  // Ajouter chaque appareil filtré à la liste
+  filteredAppliances.forEach(appliance => {
+    recupContentAppareils.innerHTML += `<p class="valueRecup">${appliance}</p>`;
+  });
+};
+const filterApplianceList = (filterValue) => {
+  const filteredAppliances = contentListFilterAppareils.filter(appliance =>
+    appliance.toLowerCase().includes(filterValue)
+  );
+
+  updateApplianceListDisplay(filteredAppliances); // Met à jour l'affichage de la liste filtrée
+};
+const updateUstensilListDisplay = (filteredUstensils) => {
+  recupContentUstensils.innerHTML = ""; // Vider la liste d'affichage
+
+  // Ajouter chaque ustensile filtré à la liste
+  filteredUstensils.forEach(ustensil => {
+    recupContentUstensils.innerHTML += `<p class="valueRecup">${ustensil}</p>`;
+  });
+};
+const filterUstensilList = (filterValue) => {
+  const filteredUstensils = contentListFilterUstensils.filter(ustensil =>
+    ustensil.toLowerCase().includes(filterValue)
+  );
+
+  updateUstensilListDisplay(filteredUstensils); // Met à jour l'affichage de la liste filtrée
+};
+
+
+// INPUT 
+
+inputIngredients.addEventListener('input', function () {
+  const filter = inputIngredients.value.trim().toLowerCase();
+
+  if (filter === "") {
+    initialDisplayData(); // Si l'input est vide, afficher les données initiales
+  } else {
+    filterContentList(filter); // Sinon, filtrer les ingrédients et mettre à jour la liste
+  }
+});
+
+inputAppareils.addEventListener('input', function () {
+  const filter = inputAppareils.value.trim().toLowerCase();
+
+  if (filter === "") {
+    initialDisplayData(); // Si l'input est vide, afficher les données initiales
+  } else {
+    filterApplianceList(filter); // Sinon, filtrer les appareils et mettre à jour la liste
+  }
+});
+
+inputUstensiles.addEventListener('input', function () {
+  const filter = inputUstensils.value.trim().toLowerCase();
+
+  if (filter === "") {
+    initialDisplayData(); // Si l'input est vide, afficher les données initiales
+  } else {
+    filterUstensilList(filter); // Sinon, filtrer les ustensiles et mettre à jour la liste
+  }
+});
+
 
 
 // INIT
@@ -322,19 +400,6 @@ formIngredients.addEventListener('submit', (event) => { // Envoie les value du f
 
   filterResult.innerHTML += `<option class="resultBloc"><p class="nameElement">${inputValue}</p><span class="closeFilter"> X </span></option>`;
   filterRecipesByIngredient(inputValue);
-});
-
-// Ajoute un événement "input" pour filtrer les options visibles
-inputIngredients.addEventListener('input', function () {
-  const filter = inputIngredients.value.trim().toLowerCase();
-
-  // Parcourt toutes les options dans la liste déroulante
-  if(inputIngredients.value == "") {
-     initialDisplayData()
-  } else {
-    filterRecipesByIngredient(filter)
-  }
-  
 });
 
 formAppareils.addEventListener('submit', (event) => { // Envoie les value du form appareils
