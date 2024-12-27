@@ -307,50 +307,40 @@ recupContentUstensils.addEventListener('click', (event) => { // Va target le tex
 
 // Update des filtres en fonction de la recherche a l'input
 
-const updateIngredientListDisplay = (filteredIngredients) => {
-  recupContentIngred.innerHTML = ""; // Vider la liste d'affichage
-
-  // Ajouter chaque ingrédient filtré à la liste
+const filterContentList = (filterValue) => {
+  recupContentIngred.innerHTML = ""; 
+  const filteredIngredients = contentListFilter.filter(ingredient =>
+    ingredient.toLowerCase().includes(filterValue) // Vérifie si la valeur de l'input est incluse dans l'ingrédient
+  );
   filteredIngredients.forEach(ingredient => {
     recupContentIngred.innerHTML += `<p class="valueRecup">${ingredient}</p>`;
   });
 };
-const filterContentList = (filterValue) => {
-  const filteredIngredients = contentListFilter.filter(ingredient =>
-    ingredient.toLowerCase().includes(filterValue) // Vérifie si la valeur de l'input est incluse dans l'ingrédient
-  );
 
-  updateIngredientListDisplay(filteredIngredients); // Met à jour l'affichage de la liste filtrée
-};
-const updateApplianceListDisplay = (filteredAppliances) => {
-  recupContentAppareils.innerHTML = ""; // Vider la liste d'affichage
-
-  // Ajouter chaque appareil filtré à la liste
-  filteredAppliances.forEach(appliance => {
-    recupContentAppareils.innerHTML += `<p class="valueRecup">${appliance}</p>`;
-  });
-};
 const filterApplianceList = (filterValue) => {
+    recupContentAppareils.innerHTML = "";
+
   const filteredAppliances = contentListFilterAppareils.filter(appliance =>
     appliance.toLowerCase().includes(filterValue)
   );
 
-  updateApplianceListDisplay(filteredAppliances); // Met à jour l'affichage de la liste filtrée
-};
-const updateUstensilListDisplay = (filteredUstensils) => {
-  recupContentUstensils.innerHTML = ""; // Vider la liste d'affichage
-
-  // Ajouter chaque ustensile filtré à la liste
-  filteredUstensils.forEach(ustensil => {
-    recupContentUstensils.innerHTML += `<p class="valueRecup">${ustensil}</p>`;
+  filteredAppliances.forEach(appliance => {
+    recupContentAppareils.innerHTML += `<p class="valueRecup">${appliance}</p>`;
   });
+
 };
+
 const filterUstensilList = (filterValue) => {
+  recupContentUstensils.innerHTML = "";
+
   const filteredUstensils = contentListFilterUstensils.filter(ustensil =>
     ustensil.toLowerCase().includes(filterValue)
   );
 
-  updateUstensilListDisplay(filteredUstensils); // Met à jour l'affichage de la liste filtrée
+  filteredUstensils.forEach(ustensil => {
+    recupContentUstensils.innerHTML += `<p class="valueRecup">${ustensil}</p>`;
+  });
+
 };
 
 
