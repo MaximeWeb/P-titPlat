@@ -199,42 +199,33 @@ function searchRecipeAndDisplay() {
   let inputValue = inputResult.value.trim().toLowerCase();
   sectionData.innerHTML = "";
 
-  
-  let filteredRecipes = [];
+  if(inputValue.length >= 1) {
+    const filteredRecipes = recipes.filter(recipe => {
+      const nameMatch = recipe.name.toLowerCase().includes(inputValue);
+      const descriptionMatch = recipe.description.toLowerCase().includes(inputValue);
+      const ingredientsMatch = recipe.ingredients.some(item =>
+        item.ingredient.toLowerCase().includes(inputValue)
+      );
+      return nameMatch || ingredientsMatch || descriptionMatch;
+    });
 
-  
-  for (let i = 0; i < recipes.length; i++) {
-    const recipe = recipes[i];
-
-  
-    const nameMatch = recipe.name.toLowerCase().includes(inputValue);
-    const descriptionMatch = recipe.description.toLowerCase().includes(inputValue);
-    const ingredientsMatch = recipe.ingredients.some(item =>
-      item.ingredient.toLowerCase().includes(inputValue)
-    );
-
- 
-    if (nameMatch || ingredientsMatch || descriptionMatch) {
-      filteredRecipes.push(recipe);
+    if (filteredRecipes.length === 0) {
+      sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
+      recupContentIngred.innerHTML = "";
+      recupContentAppareils.innerHTML = "";
+      recupContentUstensils.innerHTML = "";
+      currentFilteredRecipes = []; 
     } 
-  }
-
- 
-  if (!filteredRecipes.length) {
-    sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
-    recupContentIngred.innerHTML = "";
-    recupContentAppareils.innerHTML = "";
-    recupContentUstensils.innerHTML = "";
-    currentFilteredRecipes = [];
-  }
-
   
-  displayValueList(filteredRecipes);
-  cards(filteredRecipes);
-  currentFilteredRecipes = filteredRecipes;
-
-  console.log(currentFilteredRecipes); 
-  // return filteredRecipes;
+    displayValueList(filteredRecipes);
+    cards(filteredRecipes);
+    currentFilteredRecipes = filteredRecipes;
+    
+    console.log(currentFilteredRecipes)
+  } else {
+    initialDisplayData()
+  }
+ 
 };
 
 function filterRecipesByIngredient(ingredient) { // Va mettres a jour les recettes en fonction de l'ingredient recu
