@@ -199,28 +199,45 @@ function searchRecipeAndDisplay() {
   let inputValue = inputResult.value.trim().toLowerCase();
   sectionData.innerHTML = "";
 
-  const filteredRecipes = recipes.filter(recipe => {
+  
+  let filteredRecipes = [];
+
+  if (inputValue.length >= 1) {
+     for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+
+  
     const nameMatch = recipe.name.toLowerCase().includes(inputValue);
     const descriptionMatch = recipe.description.toLowerCase().includes(inputValue);
     const ingredientsMatch = recipe.ingredients.some(item =>
       item.ingredient.toLowerCase().includes(inputValue)
     );
-    return nameMatch || ingredientsMatch || descriptionMatch;
-  });
 
-  if (filteredRecipes.length === 0) {
-    sectionData.innerHTML = <p>Aucune recette trouvée pour "${inputValue}".</p>;
+ 
+    if (nameMatch || ingredientsMatch || descriptionMatch) {
+      filteredRecipes.push(recipe);
+    } 
+  }
+
+ 
+  if (!filteredRecipes.length) {
+    sectionData.innerHTML = `<p>Aucune recette trouvée pour "${inputValue}".</p>`;
     recupContentIngred.innerHTML = "";
     recupContentAppareils.innerHTML = "";
     recupContentUstensils.innerHTML = "";
-    currentFilteredRecipes = []; 
-  } 
+    currentFilteredRecipes = [];
+  }
 
+  
   displayValueList(filteredRecipes);
   cards(filteredRecipes);
   currentFilteredRecipes = filteredRecipes;
-  
-  console.log(currentFilteredRecipes)// Met à jour l'état global des recettes filtrées
+
+  console.log(currentFilteredRecipes); 
+  } else {
+    initialDisplayData()
+  }
+ 
   // return filteredRecipes;
 };
 
