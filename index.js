@@ -1,4 +1,4 @@
-const buttonIngredient = document.querySelector(".ingredient")
+ const buttonIngredient = document.querySelector(".ingredient")
 const buttonAppareils = document.querySelector(".appareils")
 const buttonUstensiles = document.querySelector(".ustensiles")
 const firstFilter = document.querySelector(".firstFilter")
@@ -198,9 +198,11 @@ let currentFilteredRecipes = []; // Tableau qui va recevoir des recettes filtré
 function searchRecipeAndDisplay() {
   let inputValue = inputResult.value.trim().toLowerCase();
   sectionData.innerHTML = "";
+  const nameElements = Array.from(filterResult.querySelectorAll('.nameElement')).map(element => element.textContent.trim().toLowerCase()); 
+  const recipesToFilter = nameElements.length === 0 ? recipes : currentFilteredRecipes;
 
-  if(inputValue.length >= 1) {
-    const filteredRecipes = recipes.filter(recipe => {
+  if(inputValue.length >= 3) {
+    const filteredRecipes = recipesToFilter.filter(recipe => {
       const nameMatch = recipe.name.toLowerCase().includes(inputValue);
       const descriptionMatch = recipe.description.toLowerCase().includes(inputValue);
       const ingredientsMatch = recipe.ingredients.some(item =>
@@ -337,6 +339,13 @@ const filterUstensilList = (filterValue) => {
 
 // INPUT 
 
+inputResult.addEventListener('input', function () {
+
+  searchRecipeAndDisplay() 
+ 
+});
+
+
 inputIngredients.addEventListener('input', function () {
   const filter = inputIngredients.value.trim().toLowerCase();
 
@@ -414,7 +423,3 @@ formUstensiles.addEventListener('submit', (event) => { // Envoie les value du fo
   filterResult.innerHTML += `<div class="resultBloc"><p class="nameElement">${inputValue}</p><span class="closeFilter"> X </span></div>`;
   filterRecipesByUstensil(inputValue);
 })
-
-
-
-
