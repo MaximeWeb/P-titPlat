@@ -414,7 +414,7 @@ formIngredients.addEventListener('submit', (event) => { // Envoie les value du f
   const inputValue = inputIngredients.value.trim().toLowerCase(); 
   console.log(inputValue);
 
-  filterResult.innerHTML += `<option class="resultBloc"><p class="nameElement">${inputValue}</p><span class="closeFilter"> X </span></option>`;
+  filterResult.innerHTML += `<div class="resultBloc"><p class="nameElement">${inputValue}</p><span class="closeFilter"> X </span></div>`;
   filterRecipesByIngredient(inputValue);
 });
 
