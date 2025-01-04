@@ -198,10 +198,11 @@ let currentFilteredRecipes = []; // Tableau qui va recevoir des recettes filtré
 function searchRecipeAndDisplay() {
   let inputValue = inputResult.value.trim().toLowerCase();
   sectionData.innerHTML = "";
-  const nameElements = Array.from(filterResult.querySelectorAll('.nameElement')).map(element => element.textContent.trim().toLowerCase()); 
-  const recipesToFilter = nameElements.length === 0 ? recipes : currentFilteredRecipes;
+  const nameElements = Array.from(filterResult.querySelectorAll('.nameElement')).map(element => element.textContent.trim().toLowerCase());
 
-  if(inputValue.length >= 3) {
+  if (inputValue.length >= 3) {
+    const recipesToFilter = nameElements.length === 0 ? recipes : currentFilteredRecipes;
+
     const filteredRecipes = recipesToFilter.filter(recipe => {
       const nameMatch = recipe.name.toLowerCase().includes(inputValue);
       const descriptionMatch = recipe.description.toLowerCase().includes(inputValue);
@@ -217,17 +218,16 @@ function searchRecipeAndDisplay() {
       recupContentAppareils.innerHTML = "";
       recupContentUstensils.innerHTML = "";
       currentFilteredRecipes = []; 
-    } 
-  
-    displayValueList(filteredRecipes);
-    cards(filteredRecipes);
-    currentFilteredRecipes = filteredRecipes;
-    
-    console.log(currentFilteredRecipes)
+    } else {
+      displayValueList(filteredRecipes);
+      cards(filteredRecipes);
+      currentFilteredRecipes = filteredRecipes;
+    }
+
+    console.log(currentFilteredRecipes);
   } else {
-    initialDisplayData()
+    initialDisplayData();
   }
- 
 };
 
 function filterRecipesByIngredient(ingredient) { // Va mettres a jour les recettes en fonction de l'ingredient recu
