@@ -227,7 +227,7 @@ function searchRecipeAndDisplay() {
     recupContentIngred.innerHTML = "";
     recupContentAppareils.innerHTML = "";
     recupContentUstensils.innerHTML = "";
-    currentFilteredRecipes = [];
+   
   } else {
        displayValueList(filteredRecipes);
   cards(filteredRecipes);
@@ -235,7 +235,12 @@ function searchRecipeAndDisplay() {
   }
       
   } else {
-    initialDisplayData()
+     if (currentFilteredRecipes.length > 0) {
+      displayValueList(currentFilteredRecipes); 
+      cards(currentFilteredRecipes);          
+    } else {
+      initialDisplayData(); 
+    }
   }
  
   // return filteredRecipes;
@@ -283,7 +288,8 @@ recupContentAppareils.addEventListener('click', (event) => {// Va target le text
      filterResult.innerHTML += `<div class="resultBloc"><p class="nameElement">${clickedAppareil}</p><span class="closeFilter"> X </span></div>`;
     filterRecipesByAppareil(clickedAppareil);
   } 
-  
+   secondFilter.style.display = "none"
+      buttonAppareils.style.display = "flex"
 });
 
 function filterRecipesByUstensil(ustensil) { // Va mettres a jour les recettes en fonction de l'ustensile recu
@@ -305,7 +311,8 @@ recupContentUstensils.addEventListener('click', (event) => { // Va target le tex
      filterResult.innerHTML += `<div class="resultBloc"><p class="nameElement">${clickedUstensil}</p><span class="closeFilter"> X </span></div>`;
     filterRecipesByUstensil(clickedUstensil);
   }
-   
+      thirdFilter.style.display = "none"
+      buttonUstensiles.style.display = "flex"
 });
 
 
