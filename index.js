@@ -228,14 +228,12 @@ function searchRecipeAndDisplay() {
     recupContentAppareils.innerHTML = "";
     recupContentUstensils.innerHTML = "";
     currentFilteredRecipes = [];
-  }
-
-  
-  displayValueList(filteredRecipes);
+  } else {
+       displayValueList(filteredRecipes);
   cards(filteredRecipes);
   currentFilteredRecipes = filteredRecipes;
-
-  console.log(currentFilteredRecipes); 
+  }
+      
   } else {
     initialDisplayData()
   }
