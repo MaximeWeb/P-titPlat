@@ -129,17 +129,16 @@ main {
    
   }
 
-  /* .ingredient {
-   position: relative;
-  }
-
-.appareils {
-position: relative;
+.counterRecipes {
+  color : black;
+  font-family:'Anton', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  float: right;
+  margin-right: 100px;
+  position: relative;
+  bottom: 40px;
 }
-
-.ustensiles {
-position: relative;
-} */
 
   .search-box i {
    cursor: pointer;
@@ -361,7 +360,3 @@ padding-right: 10px;
  
  
 }
-
-
-
-
