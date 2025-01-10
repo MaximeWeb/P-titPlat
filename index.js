@@ -209,7 +209,13 @@ function searchRecipeAndDisplay() {
   sectionData.innerHTML = "";
   const nameElements = Array.from(filterResult.querySelectorAll('.nameElement')).map(element => element.textContent.trim().toLowerCase()); 
   const recipesToFilter = nameElements.length === 0 ? recipes : currentFilteredRecipes;
-  
+    
+ if (nameElements.length === 0 && inputValue.length < 3) {
+    initialDisplayData();
+    return; // On quitte la fonction pour éviter d'exécuter le reste
+  }
+
+    
   let filteredRecipes = [];
   if (inputValue.length >= 3) {
      for (let i = 0; i < recipesToFilter.length; i++) {
