@@ -209,6 +209,12 @@ function searchRecipeAndDisplay() {
   sectionData.innerHTML = "";
   const nameElements = Array.from(filterResult.querySelectorAll('.nameElement')).map(element => element.textContent.trim().toLowerCase());
 
+  if (nameElements.length === 0 && inputValue.length < 3) {
+    initialDisplayData();
+    return; 
+  }
+
+ 
   if (inputValue.length >= 3) {
     const recipesToFilter = nameElements.length === 0 ? recipes : currentFilteredRecipes;
 
